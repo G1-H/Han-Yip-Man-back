@@ -1,22 +1,18 @@
 package com.supercoding.hanyipman.config;
 
-import lombok.RequiredArgsConstructor;
+import com.corundumstudio.socketio.SocketIOServer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+
 
 @Configuration
-@EnableWebSocket
-@RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer {
+public class WebSocketConfig  {
+    @Bean
+    public SocketIOServer socketIOServer() {
+        com.corundumstudio.socketio.Configuration config = new com.corundumstudio.socketio.Configuration();
+        config.setHostname("localhost");
+        config.setPort(8088); // 포트를 필요에 따라 수정
 
-    private final WebSocketHandler webSocketHandler;
-
-
-    @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "path/test").setAllowedOrigins("*");
+        return new SocketIOServer(config);
     }
 }
