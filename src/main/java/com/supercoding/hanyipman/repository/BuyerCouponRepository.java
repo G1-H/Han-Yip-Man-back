@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface BuyerCouponRepository extends JpaRepository<BuyerCoupon, Long> {
 
-    boolean existsBuyerCouponByCoupon(Coupon coupon);
+    boolean existsBuyerCouponByCouponAndBuyer(Coupon coupon, Buyer buyer);
 
     List<BuyerCoupon> findBuyerCouponsByBuyer(Buyer buyer);
 }
